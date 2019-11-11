@@ -45,18 +45,27 @@ class Fixit extends React.Component {
 
 
   render() {
+    const cardStyle = {
+      Width: 1000,
+      Height: 1000
+    }
     const containerStyle = {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      Width: 1000,
+      Height: 1000
     };
     const textFieldStyle = {
       width: 500,
       padding: 10
     };
+
+
     if(!this.state.submitted){
     return (
       <Container style={containerStyle} name="ticketreg" maxWidth="sm">
-      <Card>
+      <Card style={cardStyle}>
+      <CardContent>
       <form onSubmit={this.handleSubmit}
         noValidate autoComplete="off">
         <TextField style={textFieldStyle} value={this.state.name} onChange={this.handleChange} required
@@ -68,16 +77,34 @@ class Fixit extends React.Component {
           multiline rows="4" />
         <CardActions><Button type='submit' color="primary" >Submit</Button></CardActions>
       </form>
+      </CardContent>
       </Card>
       </Container>
     );
     }
-    else{
+    else if(this.state.submitted==="success"){
       return(
         <Container style={containerStyle}>
-          <Typography variant="h3" component="h2">
-            Message sent await for an email from me!
+        <Card style={cardStyle}>
+        <CardContent>
+          <Typography variant="h3" component="h3">
+            Success, message sent to my email, await response!
           </Typography>
+        </CardContent>
+          </Card>
+        </Container>
+      )
+    }
+    else{
+      return (
+        <Container style={containerStyle}>
+        <Card style={cardStyle}>
+        <CardContent>
+          <Typography variant="h3" component="h3">
+            Failure, did not send the message
+          </Typography>
+          </CardContent>
+          </Card>
         </Container>
       )
     }
