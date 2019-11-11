@@ -4,7 +4,9 @@ import Fixit from './Fixit';
 
 export default function App(){
   return[
+
     <Nav></Nav>,
     <Fixit></Fixit>
+
   ];
 }
