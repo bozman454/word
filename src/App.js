@@ -1,4 +1,9 @@
 import React from 'react';
+import axios from 'axios';
+
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
@@ -20,28 +25,44 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   handleChange(event) {
     const target = event.target;
     this.setState({
       [target.name]: target.value
     });
+
   }
 
   handleSubmit(event) {
     console.log(`name: ${this.state.name}, email: ${this.state.email}, message: ${this.state.message} `)
-    this.setState({submitted:"s"})
     event.preventDefault();
+    var outobj = {name: this.state.name,
+    email: this.state.email,
+    message: this.state.message};
+
+    axios.post('https://word-5862e.firebaseio.com/.json',outobj)
+    .then(res=>{console.log(res);
+      this.setState({submitted:"success"});
+      })
+
   }
 
-
   render() {
+
     const containerStyle = {
       display: 'flex',
-      justifyContent: 'center'
+      minWidth: 1000,
+      minHeight: 2000
     };
     const textFieldStyle = {
       width: 500,
     };
+
+
+
+
+
     if(!this.state.submitted){
     return (
       <Container style={containerStyle} name="ticketreg" maxWidth="sm">
@@ -61,7 +82,11 @@ class App extends React.Component {
     }
     else{
       return(
-        <p>word</p>
+        <Container style={containerStyle}>
+        <Card style={{minWidth: 1000, minHieght: 2000}}>
+        <CardContent>yo</CardContent>
+        </Card>
+        </Container>
       )
     }
   }
