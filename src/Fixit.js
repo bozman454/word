@@ -95,7 +95,7 @@ class Fixit extends React.Component {
         </Container>
       )
     }
-    else{
+    else {
       return (
         <Container style={containerStyle}>
         <Card style={cardStyle}>
