@@ -7,7 +7,6 @@ export default function App(){
   return[
 
     <Nav></Nav>,
-    <Fixit></Fixit>,
     <Dashboard></Dashboard>
 
 
