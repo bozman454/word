@@ -3,12 +3,17 @@ import Nav from './Nav';
 import Fixit from './Fixit';
 import Dashboard from './Dashboard';
 
-export default function App(){
-  return[
+export default function App() {
 
+  const badstyle = {
+    display: 'flex'
+  }
+  return [
     <Nav></Nav>,
-    <Dashboard></Dashboard>
-
+    <div style={badstyle}>
+      <Dashboard></Dashboard>
+      <Fixit></Fixit>
+    </div>
 
   ];
 }

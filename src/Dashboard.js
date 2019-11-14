@@ -17,25 +17,45 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticketlist: []
+      hovertoggler: false,
+      ticketlist: [{
+        ticket_id: 1,
+        name: "Willem",
+        email: "Willem@willem.com",
+        message: "Example Message Here"
+      },
+      {
+        ticket_id: 2,
+        name: "Bosman",
+        email: "Bosman@Bosman.com",
+        message: "Example Message Here"
+      },
+      ]
     };
+    this.togglehover = this.togglehover.bind(this)
   }
+  //  ** Needs DB to work **
+  // componentDidMount() {
+  //   fetch('http://localhost:7878/api/v1/gettickets')
+  //     .then(res => res.json())
+  //     .then((result) => {
+  //       this.setState({
+  //         ticketlist: result
+  //       })
+  //       console.log(this.state.ticketlist)
+  //     })
+  // }
 
-  componentDidMount() {
-    fetch('http://localhost:7878/api/v1/gettickets')
-      .then(res => res.json())
-      .then((result) => {
-        this.setState({
-          ticketlist: result
-        })
-        console.log(this.state.ticketlist)
-      })
+
+  togglehover = () =>{
+    this.setState({hovertoggler: !this.state.hovertoggler})
   }
 
   render() {
     const { ticketlist } = this.state;
     const cellstyle = {
       minWidht: 50,
+      background: this.state.hovertoggler ? "blue" : ""
      
     }
 
@@ -44,17 +64,17 @@ class Dashboard extends React.Component {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell style={cellstyle} align="left">ticket ID</TableCell>
-            <TableCell style={cellstyle} align="left">Sender</TableCell>
-            <TableCell style={cellstyle} align="left">Sender Email</TableCell>
+            <TableCell align="left">Ticket ID</TableCell>
+            <TableCell align="left">Sender</TableCell>
+            <TableCell align="left">Sender Email</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {ticketlist.map(row => (
-            <TableRow key={row.name}>
-              <TableCell align="left">{row.ticket_id}</TableCell>
-              <TableCell align="left">{row.name}</TableCell>
-              <TableCell align="left">{row.email}</TableCell>
+            <TableRow onMouseEnter={this.togglehover} onMouseLeave={this.togglehover}  key={row.name}>
+              <TableCell style={cellstyle}align="left">{row.ticket_id}</TableCell>
+              <TableCell style={cellstyle} align="left">{row.name}</TableCell>
+              <TableCell style={cellstyle}align="left">{row.email}</TableCell>
             </TableRow>
           ))}
 
