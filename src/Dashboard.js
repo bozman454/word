@@ -66,9 +66,12 @@ class Dashboard extends React.Component {
     const cellstyle = {
       minWidht: 50
     }
+    const cardstyle = {
+      width: 500
+    }
     if (!this.state.detail.on)
       return (
-        <Card style={{ width: 400 }}>
+        <Card style={cardstyle}>
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -92,9 +95,12 @@ class Dashboard extends React.Component {
       )
     else {
       return (
-        <Card>
+        <Card style={cardstyle}>
+          <CardHeader>
+              {this.state.detail.ticket.name}
+          </CardHeader>
           <CardContent>
-            {this.state.detail.ticket.message}
+              {this.state.detail.ticket.message}
           </CardContent>
         </Card>
       )
