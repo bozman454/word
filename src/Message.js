@@ -8,7 +8,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 const axios = require('axios');
 
-class Fixit extends React.Component {
+class Message extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +46,7 @@ class Fixit extends React.Component {
 
   render() {
     const cardStyle = {
-      Width: 1000,
+      Width: 500,
       Height: 1000
     }
     const containerStyle = {
@@ -56,7 +56,7 @@ class Fixit extends React.Component {
       Height: 1000
     };
     const textFieldStyle = {
-      width: 500,
+      width: 450,
       padding: 10
     };
 
@@ -110,4 +110,4 @@ class Fixit extends React.Component {
     }
   }
 }
-export default Fixit;
+export default Message;

@@ -4,12 +4,15 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import Paper from '@material-ui/core/Paper';
+import { typography } from '@material-ui/system';
 const axios = require('axios');
 
 class Dashboard extends React.Component {
@@ -51,7 +54,16 @@ class Dashboard extends React.Component {
   // }
   toggleDetail = (row, e) => {
     e.preventDefault();
-    console.log(row)
+    console.log(row);
+    if(this.state.detail.on){
+      this.setState({
+        detail: {
+          on: false,
+          ticket: {}
+        }
+      })
+    }
+    else{
     this.setState({
       detail: {
         on: true,
@@ -59,19 +71,34 @@ class Dashboard extends React.Component {
       }
     })
   }
+  }
 
 
   render() {
     const { ticketlist } = this.state;
     const cellstyle = {
-      minWidht: 50
+      minWidth: 50
     }
-    const cardstyle = {
-      width: 500
+    const paperstyle = {
+      width: 750,
+      height: 500,
+      Button: {
+        position: 'absolute',
+        right: 0,
+        bottom: 0
+      }
     }
+    const carddetailstyle = {
+      margin: 'auto',
+      width: 500,
+      height: 300,
+      
+    }
+    
     if (!this.state.detail.on)
       return (
-        <Card style={cardstyle}>
+        <Paper style={paperstyle}>
+          
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -88,21 +115,27 @@ class Dashboard extends React.Component {
                   <TableCell style={cellstyle} align="left">{row.email}</TableCell>
                 </TableRow>
               ))}
-
             </TableBody>
           </Table>
-        </Card>
+          
+        </Paper>
       )
     else {
       return (
-        <Card style={cardstyle}>
-          <CardHeader>
-              {this.state.detail.ticket.name}
-          </CardHeader>
-          <CardContent>
-              {this.state.detail.ticket.message}
-          </CardContent>
-        </Card>
+        <Paper style={paperstyle}>
+          <Card style={carddetailstyle}>
+          <Typography variant="h6">
+            Message from: {this.state.detail.ticket.name}
+            <br></br>
+            <br></br>
+          </Typography>
+          <Typography variant="h7">
+              Message: {this.state.detail.ticket.message}
+          </Typography>
+          <br></br>
+          <Button  onClick={(e) => this.toggleDetail({}, e)}>Back</Button>
+          </Card>
+        </Paper>
       )
     }
   }
