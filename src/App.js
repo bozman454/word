@@ -1,7 +1,10 @@
 import React from 'react';
-import Nav from './Nav';
-import Message from './Message';
-import Dashboard from './Dashboard';
+import Nav from './components/Nav';
+import Message from './components/Message';
+import Dashboard from './components/Dashboard';
+import MenuButton from './components/MenuButton';
+import Bio from './components/Bio';
+
 
 import {
   BrowserRouter as Router,
@@ -13,22 +16,21 @@ import {
 
 export default function App() {
 
-  return (
+  return [
+    <Nav/>,
     <Router>
-      <Nav />
-      
-
-     
       <Switch>
-        
         <Route path="/dashboard">
           <Dashboard />
         </Route>
         <Route path="/message">
           <Message />
         </Route>
+        <Route path="/bio">
+          <Bio />
+          </Route>
       </Switch>
     </Router>
 
-  );
+  ];
 }
